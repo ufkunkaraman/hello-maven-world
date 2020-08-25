@@ -19,6 +19,9 @@ pipeline {
           steps {
             sh '''echo "merhaba" > /home/netgsm/test
 '''
+            sh 'whoami'
+            sh 'where'
+            sh 'which docker'
           }
         }
 
