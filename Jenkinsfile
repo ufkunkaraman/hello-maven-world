@@ -8,8 +8,14 @@ pipeline {
     }
 
     stage('meavenbuuild') {
+      agent {
+        node {
+          label 'test-1'
+        }
+
+      }
       steps {
-        sh 'echo "merhaba"'
+        sh 'echo "merhaba" > /home/netgsm/test'
       }
     }
 
