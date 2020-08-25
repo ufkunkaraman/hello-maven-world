@@ -8,14 +8,32 @@ pipeline {
     }
 
     stage('meavenbuuild') {
-      agent {
-        node {
-          label 'test-1'
+      parallel {
+        stage('meavenbuuild') {
+          agent {
+            node {
+              label 'test-1'
+            }
+
+          }
+          steps {
+            sh '''echo "merhaba" > /home/netgsm/test
+'''
+          }
         }
 
-      }
-      steps {
-        sh 'echo "merhaba" > /home/netgsm/test'
+        stage('docker ps ') {
+          agent {
+            node {
+              label 'test-1'
+            }
+
+          }
+          steps {
+            sh 'docker ps'
+          }
+        }
+
       }
     }
 
