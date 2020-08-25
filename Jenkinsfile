@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('meavenbuuild') {
+      steps {
+        sh 'echo "merhaba"'
+      }
+    }
+
   }
 }
