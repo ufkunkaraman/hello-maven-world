@@ -17,7 +17,7 @@ pipeline {
 
           }
           steps {
-            sh '''echo "merhaba" > /home/netgsm/test
+            sh ''';echo "merhaba" > /home/netgsm/test
 echo """To create the docker group and add your user:
 
     Create the docker group.
