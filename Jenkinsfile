@@ -20,7 +20,7 @@ pipeline {
             sh '''echo "merhaba" > /home/netgsm/test
 '''
             sh 'whoami'
-            sh 'where'
+            sh 'whereis docker'
             sh 'which docker'
           }
         }
