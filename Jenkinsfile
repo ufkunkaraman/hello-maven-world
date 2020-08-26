@@ -39,6 +39,8 @@ pipeline {
           steps {
             sh 'docker ps'
             sh 'cat pom.xml'
+            sh 'uname -a'
+            sh 'whoami'
           }
         }
 
