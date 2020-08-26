@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('hi') {
+    stage('BEGIN OR NOT') {
       steps {
         echo 'hi'
         sh 'cat pom.xml'
@@ -9,7 +9,7 @@ pipeline {
       }
     }
 
-    stage('meavenbuuild') {
+    stage('Build') {
       parallel {
         stage('meavenbuuild') {
           agent {
@@ -60,6 +60,18 @@ touch "target/server.war";'''
           }
         }
 
+      }
+    }
+
+    stage('Test or not') {
+      agent {
+        node {
+          label 'test-1'
+        }
+
+      }
+      steps {
+        echo 'hi'
       }
     }
 
