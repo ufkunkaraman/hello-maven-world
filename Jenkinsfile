@@ -4,6 +4,7 @@ pipeline {
     stage('hi') {
       steps {
         echo 'hi'
+        sh 'cat pom.xml'
       }
     }
 
@@ -37,6 +38,7 @@ pipeline {
           }
           steps {
             sh 'docker ps'
+            sh 'cat pom.xml'
           }
         }
 
