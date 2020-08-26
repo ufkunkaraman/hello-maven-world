@@ -22,6 +22,7 @@ pipeline {
             sh 'whoami'
             sh 'whereis docker'
             sh 'which docker'
+            sh 'cat Jenkinsfile'
           }
         }
 
