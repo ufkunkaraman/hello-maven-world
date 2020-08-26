@@ -2,6 +2,12 @@ pipeline {
   agent any
   stages {
     stage('BEGIN OR NOT') {
+      agent {
+        node {
+          label 'test-1'
+        }
+
+      }
       steps {
         echo 'hi'
         sh 'cat pom.xml'
