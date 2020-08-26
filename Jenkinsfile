@@ -13,6 +13,10 @@ pipeline {
 
         }
 
+        timeout(time: 10) {
+          input(message: 'go ', id: 'go ', ok: 'go ')
+        }
+
       }
     }
 
