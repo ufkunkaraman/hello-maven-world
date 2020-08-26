@@ -42,6 +42,21 @@ pipeline {
           }
         }
 
+        stage('') {
+          agent {
+            docker {
+              image 'mvn'
+            }
+
+          }
+          steps {
+            sh '''echo "Building the server code...";
+mvn --version ;
+mkdir -p targer ; 
+touch "target/server.war";'''
+          }
+        }
+
       }
     }
 
