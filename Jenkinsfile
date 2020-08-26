@@ -5,6 +5,7 @@ pipeline {
       steps {
         echo 'hi'
         sh 'cat pom.xml'
+        input(message: 'devam ', id: '1', ok: '2')
       }
     }
 
