@@ -75,5 +75,17 @@ touch "target/server.war";'''
       }
     }
 
+    stage('Test') {
+      steps {
+        echo 'test'
+      }
+    }
+
+    stage('deploy or not ') {
+      steps {
+        input(message: '1', id: '1', ok: '1')
+      }
+    }
+
   }
 }
