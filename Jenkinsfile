@@ -6,6 +6,13 @@ pipeline {
         echo 'hi'
         sh 'cat pom.xml'
         input(message: 'GO?', id: 'No', ok: 'YES')
+        waitUntil(initialRecurrencePeriod: 1) {
+          timeout(time: 600) {
+            input(message: 'go', id: 'Id', ok: 'Ok')
+          }
+
+        }
+
       }
     }
 
