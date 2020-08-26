@@ -42,7 +42,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('build') {
           agent {
             docker {
               image 'maven:3.5.3-jdk-8-slim'
