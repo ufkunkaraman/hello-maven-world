@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Developer Start Ci/Cd or not') {
+    stage('Begin Ci/Cd (Developer Confirmation)') {
       agent {
         node {
           label 'test-1'
@@ -10,6 +10,7 @@ pipeline {
       }
       steps {
         echo 'Developer Start Ci/Cd / Print Message'
+        sh 'echo "hi"'
       }
     }
 
@@ -42,7 +43,7 @@ pipeline {
       }
     }
 
-    stage('Tester Kontrol') {
+    stage('Test  (Tester Confirmation)') {
       agent {
         node {
           label 'test-1'
@@ -54,7 +55,7 @@ pipeline {
       }
     }
 
-    stage('Developer Confirm Deploy  project ') {
+    stage('Deploy (Developer Confirm )') {
       steps {
         echo 'test'
       }
