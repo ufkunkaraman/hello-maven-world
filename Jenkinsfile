@@ -89,29 +89,52 @@ pipeline {
       }
     }
 
-    stage('Test  (Tester Confirmation)') {
-      agent {
-        node {
-          label 'test-1'
+    stage('Test') {
+      parallel {
+        stage('start') {
+          agent {
+            node {
+              label 'test-1'
+            }
+
+          }
+          steps {
+            echo 'hi'
+          }
+        }
+
+        stage('get ') {
+          steps {
+            sh 'curl 0.0.0:5000'
+          }
         }
 
       }
-      steps {
-        echo 'hi'
-      }
     }
 
-    stage('Deploy (Developer Confirm )') {
+    stage('Test  (Tester Confirmation)') {
       steps {
         echo 'test'
       }
     }
 
+    stage('Deploy (Developer Confirmation)') {
+      steps {
+        sh 'echo "deploy"'
+      }
+    }
+
     stage('Deploy') {
       parallel {
-        stage('install python lib') {
+        stage('Deploy') {
+          agent {
+            node {
+              label 'deploy-node'
+            }
+
+          }
           steps {
-            sh 'echo "deploy"'
+            echo 'deploy'
             sh 'pip install -r requirements.txt'
           }
         }
