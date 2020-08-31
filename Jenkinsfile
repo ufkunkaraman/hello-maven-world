@@ -2,15 +2,39 @@ pipeline {
   agent any
   stages {
     stage('Begin Ci/Cd (Developer Confirmation)') {
-      agent {
-        node {
-          label 'test-1'
+      parallel {
+        stage('Begin Ci/Cd (Developer Confirmation)') {
+          agent {
+            node {
+              label 'test-1'
+            }
+
+          }
+          steps {
+            echo 'Developer Start Ci/Cd / Print Message'
+            sh 'echo "hi"'
+          }
         }
 
-      }
-      steps {
-        echo 'Developer Start Ci/Cd / Print Message'
-        sh 'echo "hi"'
+        stage('get token') {
+          steps {
+            sh 'curl -X POST "http://localhost:5000/api/v1/security/login" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\\"password\\":\\"admin\\",\\"provider\\":\\"db\\",\\"refresh\\":true,\\"username\\":\\"admin\\"}" > auth.token'
+          }
+        }
+
+        stage('add confirmation') {
+          steps {
+            sh 'curl -X POST "http://127.0.0.1:5000/api/v1/developerconfirm/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\\"info\\":\\"string\\",\\"name\\":\\"string\\",\\"stage\\":\\"string\\"}" > developerbegincicd'
+          }
+        }
+
+        stage('control confirmation') {
+          steps {
+            sh '''curl -X GET "http://127.0.0.1:5000/api/v1/developerconfirm/2?q=%7B%0A%20%20%22columns%22%3A%20%5B%0A%20%20%20%20%22name%22%2C%0A%22stage%22%0A%20%20%5D%2C%0A%20%20%22keys%22%3A%20%5B%0A%20%20%20%20%22show_columns%22%0A%20%20%5D%0A%7D" -H  "accept: application/json"
+'''
+          }
+        }
+
       }
     }
 
