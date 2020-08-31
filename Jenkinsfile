@@ -10,6 +10,9 @@ pipeline {
             }
 
           }
+          environment {
+            confirm_ip = '192.168.1.39'
+          }
           steps {
             echo 'Developer Start Ci/Cd / Print Message'
             sh 'echo "hi"'
