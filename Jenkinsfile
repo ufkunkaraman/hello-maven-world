@@ -16,7 +16,7 @@ pipeline {
           steps {
             echo 'Developer Start Ci/Cd / Print Message'
             sh 'echo "hi"'
-            sh 'echo "$confirm_ip"'
+            sh 'echo $confirm_ip'
           }
         }
 
