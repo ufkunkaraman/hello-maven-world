@@ -62,8 +62,20 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        sh 'echo "deploy"'
+      parallel {
+        stage('install python lib') {
+          steps {
+            sh 'echo "deploy"'
+            sh 'pip install -r requirements.txt'
+          }
+        }
+
+        stage('work python') {
+          steps {
+            sh 'python3 app.py'
+          }
+        }
+
       }
     }
 
