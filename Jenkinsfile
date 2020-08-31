@@ -13,12 +13,13 @@ pipeline {
           steps {
             echo 'Developer Start Ci/Cd / Print Message'
             sh 'echo "hi"'
+            sh 'echo "$confirm_ip"'
           }
         }
 
         stage('get token') {
           steps {
-            sh 'curl -X POST "http://localhost:5000/api/v1/security/login" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\\"password\\":\\"admin\\",\\"provider\\":\\"db\\",\\"refresh\\":true,\\"username\\":\\"admin\\"}" > auth.token'
+            sh 'curl -X POST "http://$confirm_ip:5000/api/v1/security/login" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\\"password\\":\\"admin\\",\\"provider\\":\\"db\\",\\"refresh\\":true,\\"username\\":\\"admin\\"}" > auth.token'
           }
         }
 
@@ -103,5 +104,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    confirm_ip = '192.168.1.39'
   }
 }
