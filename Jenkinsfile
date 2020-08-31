@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('BEGIN OR NOT') {
+    stage('Developer Start Ci/Cd or not') {
       agent {
         node {
           label 'test-1'
@@ -9,19 +9,13 @@ pipeline {
 
       }
       steps {
-        echo 'hi'
-        sh 'cat pom.xml'
-        input(message: 'GO?', id: 'No', ok: 'YES')
-        timeout(time: 10, activity: true) {
-          input(message: 'go ', id: 'go ', ok: 'go ')
-        }
-
+        echo 'Developer Start Ci/Cd / Print Message'
       }
     }
 
-    stage('Build') {
+    stage('Build-Test') {
       parallel {
-        stage('meavenbuuild') {
+        stage('install python lib') {
           agent {
             node {
               label 'test-1'
@@ -29,18 +23,11 @@ pipeline {
 
           }
           steps {
-            sh '''echo "merhaba" > /home/netgsm/test
-'''
-            sh 'whoami'
-            sh 'whereis docker'
-            sh 'which docker'
-            sh 'cat Jenkinsfile'
-            sh ''' cat pom.xml
-'''
+            sh 'pip install -r requriements.txt'
           }
         }
 
-        stage('docker ps ') {
+        stage('work python') {
           agent {
             node {
               label 'test-1'
@@ -48,32 +35,14 @@ pipeline {
 
           }
           steps {
-            sh 'docker ps'
-            sh 'cat pom.xml'
-            sh 'uname -a'
-            sh 'whoami'
-          }
-        }
-
-        stage('build') {
-          agent {
-            docker {
-              image 'maven:3.5.3-jdk-8-slim'
-            }
-
-          }
-          steps {
-            sh '''echo "Building the server code...";
-mvn --version ;
-mkdir -p targer ; 
-touch "target/server.war";'''
+            sh 'python3 app.py'
           }
         }
 
       }
     }
 
-    stage('Test or not') {
+    stage('Tester Kontrol') {
       agent {
         node {
           label 'test-1'
@@ -85,13 +54,13 @@ touch "target/server.war";'''
       }
     }
 
-    stage('Test') {
+    stage('Developer Confirm Deploy  project ') {
       steps {
         echo 'test'
       }
     }
 
-    stage('deploy or not ') {
+    stage('Deploy') {
       steps {
         input(message: '1', id: '1', ok: '1')
       }
