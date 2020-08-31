@@ -62,7 +62,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        input(message: '1', id: '1', ok: '1')
+        sh 'echo "deploy"'
       }
     }
 
